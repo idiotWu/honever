@@ -1,4 +1,4 @@
-function honever() {
+module.exports = function () {
     var ignore = /:hover/;
     var foreach = Function.prototype.call.bind(Array.prototype.forEach);
 
@@ -7,7 +7,6 @@ function honever() {
         var recoup = 0;
 
         foreach(sheet.cssRules, function(rule, idx) {
-            console.log(idx, sheet.cssRules.length)
             var cssText = rule.cssText;
             var selectorText = rule.selectorText;
 
@@ -26,5 +25,3 @@ function honever() {
         });
     });
 };
-
-module.exports = honever;

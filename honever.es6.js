@@ -1,4 +1,4 @@
-let honever = () => {
+export default () => {
     let ignore = /:hover/;
     let foreach = Function.prototype.call.bind(Array.prototype.forEach);
 
@@ -26,5 +26,3 @@ let honever = () => {
         });
     });
 };
-
-export default honever;
