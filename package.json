@@ -1,0 +1,24 @@
+{
+  "name": "honever",
+  "version": "0.0.1",
+  "description": "remove annoying hover effects",
+  "main": "honever.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/idiotWu/honever.git"
+  },
+  "keywords": [
+    "hover",
+    "style",
+    "css"
+  ],
+  "author": "Dolphin Wood <dolphin.w.e@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/idiotWu/honever/issues"
+  },
+  "homepage": "https://github.com/idiotWu/honever#readme"
+}

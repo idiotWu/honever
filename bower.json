@@ -1,0 +1,26 @@
+{
+  "name": "honever",
+  "main": "honever.es6.js",
+  "version": "0.0.1",
+  "homepage": "https://github.com/idiotWu/honever",
+  "authors": [
+    "Dolphin Wood <dolphin.w.e@gmail.com>"
+  ],
+  "description": "remove annoying hover effects",
+  "moduleType": [
+    "es6"
+  ],
+  "keywords": [
+    "hover",
+    "style",
+    "css"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
