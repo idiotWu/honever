@@ -6,7 +6,7 @@ module.exports = function () {
         if (!sheet.cssRules) return;
         var recoup = 0;
 
-        foreach(sheet.cssRules, function(rule, idx) {
+        foreach(sheet.cssRules, function(rule, index) {
             var cssText = rule.cssText;
             var selectorText = rule.selectorText;
 

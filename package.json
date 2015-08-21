@@ -1,6 +1,6 @@
 {
   "name": "honever",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "remove annoying hover effects",
   "main": "honever.js",
   "scripts": {

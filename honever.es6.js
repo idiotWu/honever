@@ -5,7 +5,7 @@ export default () => {
     foreach(document.styleSheets, (sheet) => {
         if (!sheet.cssRules) return;
 
-        foreach(sheet.cssRules, (rule, idx) => {
+        foreach(sheet.cssRules, (rule, index) => {
             let { cssText, selectorText } = rule;
 
             if (!selectorText) return;
