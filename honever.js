@@ -1,27 +1,31 @@
-module.exports = function () {
+module.exports = function() {
     var ignore = /:hover/;
-    var foreach = Function.prototype.call.bind(Array.prototype.forEach);
+    var toArray = Function.prototype.call.bind(Array.prototype.slice);
 
-    foreach(document.styleSheets, function(sheet) {
+    toArray(document.styleSheets).forEach(function(sheet) {
         if (!sheet.cssRules) return;
         var recoup = 0;
 
-        foreach(sheet.cssRules, function(rule, index) {
+        toArray(sheet.cssRules).forEach(function(rule, idx) {
             var cssText = rule.cssText;
             var selectorText = rule.selectorText;
 
-            if (!selectorText) return;
+            if (!ignore.test(selectorText)) return;
 
-            var newSelector = selectorText.split(',').filter(function(str) {
-                return !ignore.test(str);
-            }).join(',');
+            var newSelector = selectorText.split(',')
+                .filter(function(str) {
+                    return !ignore.test(str);
+                })
+                .join(',');
 
-            if (newSelector === selectorText) return;
+            var index = idx - count;
+            sheet.deleteRule(index);
 
             try {
-                sheet.deleteRule(index);
                 sheet.insertRule(cssText.replace(selectorText, newSelector), index);
-            } catch (e) {}
+            } catch (e) {
+                recoup++;
+            }
         });
     });
 };

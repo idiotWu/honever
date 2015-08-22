@@ -1,28 +1,30 @@
 export default () => {
     let ignore = /:hover/;
-    let foreach = Function.prototype.call.bind(Array.prototype.forEach);
 
-    foreach(document.styleSheets, (sheet) => {
+    [...document.styleSheets].forEach((sheet) => {
         if (!sheet.cssRules) return;
+        let recoup = 0;
 
-        foreach(sheet.cssRules, (rule, index) => {
+        // make a copy of origin css rules
+        [...sheet.cssRules].forEach((rule, idx) => {
             let { cssText, selectorText } = rule;
 
-            if (!selectorText) return;
+            if (!ignore.test(selectorText)) return;
 
             let newSelector = selectorText.split(',')
                 .filter((str) => !ignore.test(str))
                 .join(',');
 
-            if (newSelector === selectorText) return;
+            let index = idx - recoup;
+            sheet.deleteRule(index);
 
             try {
-                sheet.deleteRule(index);
-                sheet.insertRule(
-                    cssText.replace(selectorText, newSelector),
-                    index
-                );
-            } catch(e) {}
+                sheet.insertRule(cssText.replace(selectorText, newSelector), index);
+            } catch(e) {
+                // empty selector or other reason will cause insert error
+                // add up error count to fix insert/delete index
+                recoup++;
+            }
         });
     });
 };
