@@ -18,7 +18,7 @@ module.exports = function() {
                 })
                 .join(',');
 
-            var index = idx - count;
+            var index = idx - recoup;
             sheet.deleteRule(index);
 
             try {
