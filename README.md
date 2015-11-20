@@ -19,6 +19,16 @@ import honever from 'honever.es6.js';
 honever();
 ```
 
+OR
+
+```
+npm install honever --save
+```
+
+```javascript
+require('honever')();
+```
+
 ### Why is the name so strange?
 
 Good names are taken by other guys.
