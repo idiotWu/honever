@@ -1,5 +1,5 @@
 export default () => {
-    let ignore = /:hover/;
+    let HOVER_PATTERN = /:hover/;
 
     [...document.styleSheets].forEach((sheet) => {
         if (!sheet.cssRules) return;
@@ -9,20 +9,18 @@ export default () => {
         [...sheet.cssRules].forEach((rule, idx) => {
             let { cssText, selectorText } = rule;
 
-            if (!ignore.test(selectorText)) return;
+            if (!HOVER_PATTERN.test(selectorText)) return;
 
             let newSelector = selectorText.split(',')
-                .filter((str) => !ignore.test(str))
+                .filter((str) => !HOVER_PATTERN.test(str))
                 .join(',');
 
-            let index = idx - recoup;
-            sheet.deleteRule(index);
-
-            try {
-                sheet.insertRule(cssText.replace(selectorText, newSelector), index);
-            } catch(e) {
-                // empty selector or other reason will cause insert error
+            if (newSelector) {
+                rule.selectorText = newSelector;
+            } else {
+                // empty selector will cause error
                 // add up error count to fix insert/delete index
+                sheet.deleteRule(idx - recoup);
                 recoup++;
             }
         });

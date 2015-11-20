@@ -1,5 +1,5 @@
 module.exports = function() {
-    var ignore = /:hover/;
+    var HOVER_PATTERN = /:hover/i;
     var toArray = Function.prototype.call.bind(Array.prototype.slice);
 
     toArray(document.styleSheets).forEach(function(sheet) {
@@ -10,20 +10,18 @@ module.exports = function() {
             var cssText = rule.cssText;
             var selectorText = rule.selectorText;
 
-            if (!ignore.test(selectorText)) return;
+            if (!HOVER_PATTERN.test(selectorText)) return;
 
             var newSelector = selectorText.split(',')
                 .filter(function(str) {
-                    return !ignore.test(str);
+                    return !HOVER_PATTERN.test(str);
                 })
                 .join(',');
 
-            var index = idx - recoup;
-            sheet.deleteRule(index);
-
-            try {
-                sheet.insertRule(cssText.replace(selectorText, newSelector), index);
-            } catch (e) {
+            if (newSelector) {
+                rule.selectorText = newSelector;
+            } else {
+                sheet.deleteRule(idx - recoup);
                 recoup++;
             }
         });
